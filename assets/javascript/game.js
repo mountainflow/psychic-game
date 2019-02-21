@@ -4,6 +4,8 @@ var losses = 0;
 var guessesLeft = 9;
 var guessesSoFar;
 
+document.getElementById
+
 
 // computer picks random letters
 function computerGuess() {
@@ -23,18 +25,22 @@ function userGuess() {
     // compare computer to user
     if (computerChoice === theKey) {
         wins++;
+        computerChoice = String.fromCharCode(computerGuess());
+        console.log("you win");
         console.log("Wins: " + wins);
+        console.log("Computer's Guess: " + computerChoice);
     } else {
         guessesLeft--;
         console.log("Guesses Left: " + guessesLeft);
     };
 
+    if (guessesLeft === 0) {
+        losses++;
+        computerChoice = String.fromCharCode(computerGuess());
+        console.log("you lose");
+        console.log("Losses: " + losses);
+        console.log("Computer's Guess: " + computerChoice);
+
+    };
+
 };
-
-
-
-
-
-
-
-console.log("Losses: " + losses);
