@@ -2,7 +2,7 @@
 var wins = 0;
 var losses = 0;
 var guessesLeft = 9;
-var guessesSoFar = ["E"];
+var guessesSoFar = [];
 
 // computer picks random letters
 function computerGuess() {
@@ -12,48 +12,32 @@ function computerGuess() {
 var computerChoice = String.fromCharCode(computerGuess());
 console.log("Computer's Guess: " + computerChoice);
 
-
-
-// NEED TO MAKE IT SO NOTHING HAPPENS WHEN USER HITS THE SAME KEY MULTIPLE TIMES
-
-
-
 // user chooses letter
 document.addEventListener("keyup", userGuess);
 
-function userGuess() {
+function userGuess(event) {
     var theKey = event.key.toUpperCase();
     if (event.keyCode >= 65 && event.keyCode <= 90) {
-
 
         var useGuess = true;
         // var n = guessesSoFar.includes(theKey);
 
         if (guessesSoFar.includes(theKey)) {
-            userGuess = false;
+            useGuess = false;
         }
-
-
-        // check guessesSoFar array for used keys
-        // if has been used
-        // useGuess = false;
-
-
         console.log("keyCode ", event.key);
 
-        // put theKey inside guessesSoFar array
-
-
-
-
-        if (useGuess === true) {
-
+        if (useGuess) {
+            // put theKey inside guessesSoFar array
+            guessesSoFar.push(theKey);
+            console.log('guessesSoFar', guessesSoFar);
 
             // add the user guesses to html
-            var listItem = document.createElement("li");
-            var t = document.createTextNode(theKey + ", ");
-            listItem.appendChild(t);
-            document.getElementById("guesses").appendChild(listItem);
+            // var listItem = document.createElement("li");
+            // var t = document.createTextNode(theKey + ", ");
+            // listItem.appendChild(t);
+            // document.getElementById("guesses").appendChild(listItem);
+            document.getElementById("guesses").innerHTML = guessesSoFar.join(', ');
 
             console.log("Your Guess: " + theKey);
 
@@ -68,6 +52,7 @@ function userGuess() {
 
                 // clearing the guesses
                 document.getElementById("guesses").textContent = "";
+                guessesSoFar = [];
 
                 console.log("you win");
                 console.log("Wins: " + wins);
@@ -88,6 +73,7 @@ function userGuess() {
 
                 // clearing the guesses
                 document.getElementById("guesses").textContent = "";
+                guessesSoFar = [];
 
                 console.log("you lose");
                 console.log("Losses: " + losses);
@@ -97,10 +83,5 @@ function userGuess() {
         } else {
             alert("YOU HAVE ALREADY USED THAT LETTER!!");
         };
-
-
     };
-
-
-
 };
